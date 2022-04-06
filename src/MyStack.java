@@ -1,4 +1,4 @@
-public class MyStack {
+class MyStack {
     Node start;
 
     public MyStack() {start = null;}
@@ -26,6 +26,7 @@ public class MyStack {
         }
         return size;
     }
+
     public String toString() {
         Node move = start;
         String result = "[";

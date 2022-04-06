@@ -1,4 +1,4 @@
-public class Burger {
+class Burger {
     public static int order = 0;
     int pattyCount = 1;
     String pattyType = "Beef";

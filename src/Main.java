@@ -1,9 +1,11 @@
 public class Main {
     public static void main(String[] args) {
 //        testMyStack();
-        testBurger();
+//        testBurger();
     }
-    static void testMyStack() {
+
+
+    void testMyStack() {
         MyStack stack = new MyStack();
         stack.push("test1");
         System.out.println(stack.peek());
@@ -16,7 +18,7 @@ public class Main {
         System.out.println(stack.peek());
 
     }
-    static void testBurger() {
+    void testBurger() {
         Burger burg = new Burger(true);
         System.out.println("Remove ingredient test, removing Mayonnaise");
         burg.removeIngredient("Mayonnaise");
