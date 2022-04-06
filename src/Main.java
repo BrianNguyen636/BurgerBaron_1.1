@@ -3,10 +3,10 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-//        testMyStack();
+        testMyStack();
 //        testBurger();
-        parseLine("Single Burger with Veggies but no Lettuce.");
-        parseLine("Double Chicken Burger with Ketchup Cheddar Onions Mushrooms.");
+//        parseLine("Single Burger with Veggies but no Lettuce.");
+//        parseLine("Double Chicken Burger with Ketchup Cheddar Onions Mushrooms.");
     }
     static void parseLine(String line) {
 //        line = line.substring(0,line.length() - 1);
@@ -51,21 +51,31 @@ public class Main {
         System.out.println(theBurger);
     }
 
-    void testMyStack() {
+    static void testMyStack() {
+        System.out.println("Testing MyStack class...");
         MyStack stack = new MyStack();
+        System.out.println("Pushing test1");
         stack.push("test1");
-        System.out.println(stack.peek());
+        System.out.println("Peek: " + stack.peek());
+        System.out.println("Pushing test2");
         stack.push("test2");
-        System.out.println(stack.peek());
+        System.out.println("Peek: " + stack.peek());
+        System.out.println("Pushing test3");
         stack.push("test3");
-        System.out.println(stack.peek());
-        System.out.println(stack);
-        System.out.println(stack.pop());
-        System.out.println(stack.peek());
+        System.out.println("Size: " + stack.size());
+        System.out.println("Peek: " + stack.peek());
+        System.out.println("Stack: " + stack);
+        System.out.println("Popping: " + stack.pop());
+        System.out.println("Size: " + stack.size());
+        System.out.println("Peek: " + stack.peek());
+        System.out.println("Stack: " + stack);
 
     }
-    void testBurger() {
+    static void testBurger() {
+        System.out.println("Testing Burger class...");
+        System.out.println("Making Baron Burger");
         Burger burg = new Burger(true);
+        System.out.println(burg);
         System.out.println("Remove ingredient test, removing Mayonnaise");
         burg.removeIngredient("Mayonnaise");
         System.out.println(burg);
