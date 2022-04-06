@@ -48,7 +48,6 @@ public class Main {
         } else if (order.contains("Veggie")) {
             theBurger.changePatties("Veggie");
         }
-
         System.out.println(theBurger);
     }
 
