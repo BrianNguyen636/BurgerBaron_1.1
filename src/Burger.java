@@ -1,5 +1,6 @@
 class Burger {
-    public static int order = 0;
+    public static int orders = 0;
+    int orderNum = 0;
     int pattyCount = 1;
     String pattyType = "Beef";
     MyStack stack;
@@ -7,10 +8,12 @@ class Burger {
 
     public Burger(boolean theWorks) {
         stack = new MyStack();
+        orderNum = orders;
+        orders++;
         baron.push("Pickle");
         baron.push("Bun");
         baron.push("Mayonnaise");
-        baron.push("Baron Sauce");
+        baron.push("Baron-Sauce");
         baron.push("Lettuce");
         baron.push("Tomato");
         baron.push("Onions");
@@ -70,7 +73,7 @@ class Burger {
     void addCategory(String category) {
         String list = switch (category) {
             case "Cheese" -> "Cheddar Mozzarella Pepperjack";
-            case "Sauce" -> "Ketchup Mustard Mayonnaise Baron Sauce";
+            case "Sauce" -> "Ketchup Mustard Mayonnaise Baron-Sauce";
             case "Veggies" -> "Lettuce Tomato Onions Pickle Mushrooms";
             default -> "";
         };
@@ -147,7 +150,6 @@ class Burger {
         }
     }
     public String toString() {
-        ++order;
         return stack.toString();
     }
 
