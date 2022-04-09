@@ -2,20 +2,26 @@ import java.io.File;
 
 import java.io.FileNotFoundException;
 import java.util.*;
+/*
+ * @Author Brian Nguyen
+ */
 
 public class Main {
     public static void main(String[] args) {
-//        testMyStack();
-//        testBurger();
+        testMyStack();
+        testBurger();
         try {
             Scanner inputScan = new Scanner(System.in);
             System.out.println("Type name of input file (include file extension): ");
             String file = inputScan.nextLine();
             File myObj = new File(file);
             Scanner scan = new Scanner(myObj);
+            int orderNumber = 0;
             while (scan.hasNextLine()) {
                 String line = scan.nextLine();
+                System.out.println("Processing order " + orderNumber + ": " + line);
                 parseLine(line);
+                orderNumber++;
             }
             scan.close();
         } catch (FileNotFoundException e) {
@@ -27,7 +33,7 @@ public class Main {
         List<String> order = List.of(line.split(" "));
         boolean theWorks = order.contains("Baron");
         Burger theBurger = new Burger(theWorks);
-        System.out.println("Processing order " + theBurger.orderNum + ": " + line);
+
         if (order.contains("Double")) {
             theBurger.addPatty();
         }
@@ -104,10 +110,14 @@ public class Main {
         System.out.println("Size: " + stack.size());
         System.out.println("Peek: " + stack.peek());
         System.out.println("Stack: " + stack);
+        System.out.println();
 
     }
     static void testBurger() {
         System.out.println("Testing Burger class...");
+        System.out.println("Making burger");
+        Burger burger = new Burger(false);
+        System.out.println(burger);
         System.out.println("Making Baron Burger");
         Burger burg = new Burger(true);
         System.out.println(burg);
@@ -135,5 +145,6 @@ public class Main {
         System.out.println("Adding category test, adding Cheese");
         burg.addCategory("Cheese");
         System.out.println(burg);
+        System.out.println();
     }
 }

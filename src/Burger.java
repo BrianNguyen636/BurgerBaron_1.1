@@ -1,21 +1,20 @@
+/*
+ * @author Brian Nguyen
+ */
 class Burger {
-    public static int orders = 0;
-    int orderNum;
     int pattyCount = 1;
-    String pattyType = "Beef";
+    String patty = "Beef";
     MyStack burger;
     MyStack baronRecipe = new MyStack();
 
-    public Burger(boolean theWorks) {
+    Burger(boolean theWorks) {
         burger = new MyStack();
-        orderNum = orders;
-        orders++;
         if (theWorks) {
             burger.push("Bun");
             burger.push("Ketchup");
             burger.push("Mustard");
             burger.push("Mushrooms");
-            burger.push(pattyType);
+            burger.push(patty);
             burger.push("Cheddar");
             burger.push("Mozzarella");
             burger.push("Pepperjack");
@@ -28,7 +27,7 @@ class Burger {
             burger.push("Pickle");
         } else {
             burger.push("Bun");
-            burger.push(pattyType);
+            burger.push(patty);
             burger.push("Bun");
         }
         baronRecipe.push("Pickle");
@@ -38,23 +37,23 @@ class Burger {
         baronRecipe.push("Lettuce");
         baronRecipe.push("Tomato");
         baronRecipe.push("Onions");
-        baronRecipe.push(pattyType);
-        baronRecipe.push(pattyType);
+        baronRecipe.push(patty);
+        baronRecipe.push(patty);
         baronRecipe.push("Pepperjack");
         baronRecipe.push("Mozzarella");
         baronRecipe.push("Cheddar");
-        baronRecipe.push(pattyType);
+        baronRecipe.push(patty);
         baronRecipe.push("Mushrooms");
         baronRecipe.push("Mustard");
         baronRecipe.push("Ketchup");
         baronRecipe.push("Bun");
     }
-    void changePatties(String thePattyType) {
+    void changePatties(String pattyType) {
         MyStack store = new MyStack();
         while (!burger.isEmpty()) {
-            if (burger.peek().equals(pattyType)) {
+            if (burger.peek().equals(patty)) {
                 burger.pop();
-                store.push(thePattyType);
+                store.push(pattyType);
             } else {
                 store.push(burger.pop());
             }
@@ -62,24 +61,24 @@ class Burger {
         while (!store.isEmpty()) {
             burger.push(store.pop());
         }
-        pattyType = thePattyType;
+        patty = pattyType;
     }
     void addPatty() {
         if (pattyCount != 3) {
             MyStack store = new MyStack();
-            while (!("Pepperjack Mozzarella Cheddar" + pattyType)
+            while (!("Pepperjack Mozzarella Cheddar" + patty)
                     .contains(burger.peek())) {
                 store.push(burger.pop());
             }
-            burger.push(pattyType);
+            burger.push(patty);
             pattyCount++;
             while (!store.isEmpty()) {
                 burger.push(store.pop());
             }
         }
     }
-    void addCategory(String category) {
-        String list = switch (category) {
+    void addCategory(String type) {
+        String category = switch (type) {
             case "Cheese" -> "Cheddar Mozzarella Pepperjack";
             case "Sauce" -> "Ketchup Mustard Mayonnaise Baron-Sauce";
             case "Veggies" -> "Lettuce Tomato Onions Pickle Mushrooms";
@@ -92,9 +91,9 @@ class Burger {
         }
         while (!store.isEmpty()) {
             String item = baronRecipe.pop();
-            if ("Veggie Chicken Beef".contains(item)) item = pattyType;
+            if ("Veggie Chicken Beef".contains(item)) item = patty;
             baronStore.push(item);
-            if (list.contains(item)) {
+            if (category.contains(item)) {
                 burger.push(item);
             }
             if (item.equals(store.peek())) {
@@ -105,8 +104,8 @@ class Burger {
             baronRecipe.push(baronStore.pop());
         }
     }
-    void removeCategory(String category) {
-        String list = switch (category) {
+    void removeCategory(String type) {
+        String category = switch (type) {
             case "Cheese" -> "Cheddar Mozzarella Pepperjack";
             case "Sauce" -> "Ketchup Mustard Mayonnaise Baron-Sauce";
             case "Veggies" -> "Lettuce Tomato Onions Pickle Mushrooms";
@@ -114,7 +113,7 @@ class Burger {
         };
         MyStack store = new MyStack();
         while (!burger.isEmpty()) {
-            if (list.contains(burger.peek())) {
+            if (category.contains(burger.peek())) {
                 burger.pop();
             } else {
                 store.push(burger.pop());
@@ -125,7 +124,7 @@ class Burger {
         }
 
     }
-    void addIngredient(String ingredient) {
+    void addIngredient(String type) {
         MyStack store = new MyStack();
         MyStack baronStore = new MyStack();
         while (!burger.isEmpty()) {
@@ -134,8 +133,8 @@ class Burger {
         while (!store.isEmpty()) {
             String item = baronRecipe.pop();
             baronStore.push(item);
-            if ("Veggie Chicken Beef".contains(item)) item = pattyType;
-            if (item.equals(ingredient)) {
+            if ("Veggie Chicken Beef".contains(item)) item = patty;
+            if (item.equals(type)) {
                 burger.push(item);
             }
             if (item.equals(store.peek())) {

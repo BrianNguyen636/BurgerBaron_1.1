@@ -1,20 +1,35 @@
+/*
+ * @Author Brian Nguyen
+ *
+ */
+
 class MyStack {
+    class Node {
+        Node next;
+        String theItem;
+
+        public Node(String item) {
+            theItem = item;
+            next = null;
+        }
+        public String toString() {return theItem;}
+    }
     Node start;
 
-    public MyStack() {start = null;}
+    MyStack() {start = null;}
 
     boolean isEmpty() {return start == null;}
-
-    void push(String theItem) {
-        Node item = new Node(theItem);
-        item.next = start;
-        start = item;
+    void push(String item) {
+        Node node = new Node(item);
+        node.next = start;
+        start = node;
     }
     String pop() {
         Node result = start;
         start = start.next;
         return result.toString();
     }
+
     String peek() {return start.toString();}
 
     int size() {
@@ -26,12 +41,11 @@ class MyStack {
         }
         return size;
     }
-
     public String toString() {
         Node move = start;
         String result = "[";
         while (move != null) {
-            result += move.item;
+            result += move.theItem;
             if (move.next != null) {
                 result += ", ";
             } else {
@@ -41,14 +55,4 @@ class MyStack {
         }
         return result;
     }
-}
-class Node {
-    Node next;
-    String item;
-
-    public Node(String theItem) {
-        item = theItem;
-        next = null;
-    }
-    public String toString() {return item;}
 }
