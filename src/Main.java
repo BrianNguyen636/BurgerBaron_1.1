@@ -19,7 +19,7 @@ public class Main {
             }
             scan.close();
         } catch (FileNotFoundException e) {
-            System.out.println(e);
+            System.out.println("Can't find file");
         }
     }
     static void parseLine(String line) {
@@ -27,10 +27,10 @@ public class Main {
         List<String> order = List.of(line.split(" "));
         boolean theWorks = order.contains("Baron");
         Burger theBurger = new Burger(theWorks);
-        System.out.println("Proccessing order " + theBurger.orderNum + ": " + line);
+        System.out.println("Processing order " + theBurger.orderNum + ": " + line);
         if (!theWorks) {
             if (order.contains("with")) {
-                int additionsIndex = 0;
+                int additionsIndex;
                 if (order.contains("but")) {
                     additionsIndex = order.indexOf("but");
                 } else {
@@ -51,7 +51,7 @@ public class Main {
             }
         } else {
             if (order.contains("with")) {
-                int omissionsIndex = 0;
+                int omissionsIndex;
                 if (order.contains("but")) {
                     omissionsIndex = order.indexOf("but");
                 } else {

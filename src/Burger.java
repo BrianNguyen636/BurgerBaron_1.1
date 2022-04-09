@@ -1,6 +1,6 @@
 class Burger {
     public static int orders = 0;
-    int orderNum = 0;
+    int orderNum;
     int pattyCount = 1;
     String pattyType = "Beef";
     MyStack burger;
