@@ -3,11 +3,11 @@ class Burger {
     int orderNum = 0;
     int pattyCount = 1;
     String pattyType = "Beef";
-    MyStack stack;
+    MyStack burger;
     MyStack baron = new MyStack();
 
     public Burger(boolean theWorks) {
-        stack = new MyStack();
+        burger = new MyStack();
         orderNum = orders;
         orders++;
         baron.push("Pickle");
@@ -20,7 +20,7 @@ class Burger {
         baron.push("Pepperjack");
         baron.push("Mozzarella");
         baron.push("Cheddar");
-        baron.push("Beef");
+        baron.push(pattyType);
         baron.push("Mushrooms");
         baron.push("Mustard");
         baron.push("Ketchup");
@@ -29,30 +29,30 @@ class Burger {
             MyStack store = new MyStack();
             while (!baron.isEmpty()) {
                 String holder = baron.pop();
-                stack.push(holder);
+                burger.push(holder);
                 store.push(holder);
             }
             while (!store.isEmpty()) {
                 baron.push(store.pop());
             }
         } else {
-            stack.push("Bun");
-            stack.push("Beef");
-            stack.push("Bun");
+            burger.push("Bun");
+            burger.push(pattyType);
+            burger.push("Bun");
         }
     }
     void changePatties(String thePattyType) {
         MyStack store = new MyStack();
-        while (!stack.isEmpty()) {
-            if (stack.peek().equals(pattyType)) {
-                stack.pop();
+        while (!burger.isEmpty()) {
+            if (burger.peek().equals(pattyType)) {
+                burger.pop();
                 store.push(thePattyType);
             } else {
-                store.push(stack.pop());
+                store.push(burger.pop());
             }
         }
         while (!store.isEmpty()) {
-            stack.push(store.pop());
+            burger.push(store.pop());
         }
         pattyType = thePattyType;
     }
@@ -60,13 +60,13 @@ class Burger {
         if (pattyCount != 3) {
             MyStack store = new MyStack();
             while (!("Pepperjack Mozzarella Cheddar" + pattyType)
-                    .contains(stack.peek())) {
-                store.push(stack.pop());
+                    .contains(burger.peek())) {
+                store.push(burger.pop());
             }
-            stack.push(pattyType);
+            burger.push(pattyType);
             pattyCount++;
             while (!store.isEmpty()) {
-                stack.push(store.pop());
+                burger.push(store.pop());
             }
         }
     }
@@ -79,17 +79,18 @@ class Burger {
         };
         MyStack store = new MyStack();
         MyStack baronStore = new MyStack();
-        while (!stack.isEmpty()) {
-            store.push(stack.pop());
+        while (!burger.isEmpty()) {
+            store.push(burger.pop());
         }
         while (!store.isEmpty()) {
             String item = baron.pop();
+            if ("Veggie Chicken Beef".contains(item)) item = pattyType;
             baronStore.push(item);
             if (list.contains(item)) {
-                stack.push(item);
+                burger.push(item);
             }
             if (item.equals(store.peek())) {
-                stack.push(store.pop());
+                burger.push(store.pop());
             }
         }
         while (!baronStore.isEmpty()) {
@@ -104,32 +105,33 @@ class Burger {
             default -> "";
         };
         MyStack store = new MyStack();
-        while (!stack.isEmpty()) {
-            if (list.contains(stack.peek())) {
-                stack.pop();
+        while (!burger.isEmpty()) {
+            if (list.contains(burger.peek())) {
+                burger.pop();
             } else {
-                store.push(stack.pop());
+                store.push(burger.pop());
             }
         }
         while (!store.isEmpty()) {
-            stack.push(store.pop());
+            burger.push(store.pop());
         }
 
     }
     void addIngredient(String ingredient) {
         MyStack store = new MyStack();
         MyStack baronStore = new MyStack();
-        while (!stack.isEmpty()) {
-            store.push(stack.pop());
+        while (!burger.isEmpty()) {
+            store.push(burger.pop());
         }
         while (!store.isEmpty()) {
             String item = baron.pop();
             baronStore.push(item);
+            if ("Veggie Chicken Beef".contains(item)) item = pattyType;
             if (item.equals(ingredient)) {
-                stack.push(item);
+                burger.push(item);
             }
             if (item.equals(store.peek())) {
-                stack.push(store.pop());
+                burger.push(store.pop());
             }
         }
         while (!baronStore.isEmpty()) {
@@ -138,19 +140,19 @@ class Burger {
     }
     void removeIngredient(String type) {
         MyStack store = new MyStack();
-        while (!stack.isEmpty()) {
-            if (stack.peek().equals(type)) {
-                stack.pop();
+        while (!burger.isEmpty()) {
+            if (burger.peek().equals(type)) {
+                burger.pop();
             } else {
-                store.push(stack.pop());
+                store.push(burger.pop());
             }
         }
         while (!store.isEmpty()) {
-            stack.push(store.pop());
+            burger.push(store.pop());
         }
     }
     public String toString() {
-        return stack.toString() + "\n";
+        return burger.toString() + "\n";
     }
 
 }

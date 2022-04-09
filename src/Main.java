@@ -8,7 +8,10 @@ public class Main {
 //        testMyStack();
 //        testBurger();
         try {
-            File myObj = new File("customer.txt");
+            Scanner inputScan = new Scanner(System.in);
+            System.out.println("Type name of input file (include file extension): ");
+            String file = inputScan.nextLine();
+            File myObj = new File(file);
             Scanner scan = new Scanner(myObj);
             while (scan.hasNextLine()) {
                 String line = scan.nextLine();
@@ -108,21 +111,6 @@ public class Main {
         System.out.println("Making Baron Burger");
         Burger burg = new Burger(true);
         System.out.println(burg);
-        System.out.println("Remove ingredient test, removing Mayonnaise");
-        burg.removeIngredient("Mayonnaise");
-        System.out.println(burg);
-        System.out.println("Removing category test, removing cheese");
-        burg.removeCategory("Cheese");
-        System.out.println(burg);
-        System.out.println("Removing veggies");
-        burg.removeCategory("Veggies");
-        System.out.println(burg);
-        System.out.println("Adding ingredient test, adding Mushrooms");
-        burg.addIngredient("Mushrooms");
-        System.out.println(burg);
-        System.out.println("Adding category test, adding Cheese");
-        burg.addCategory("Cheese");
-        System.out.println(burg);
         System.out.println("Add Patty Test");
         System.out.println(burg);
         burg.addPatty();
@@ -131,6 +119,21 @@ public class Main {
         System.out.println(burg);
         System.out.println("Change Patty Test");
         burg.changePatties("Chicken");
+        System.out.println(burg);
+        System.out.println("Remove ingredient test, removing Mayonnaise");
+        burg.removeIngredient("Mayonnaise");
+        System.out.println(burg);
+        System.out.println("Removing veggies");
+        burg.removeCategory("Veggies");
+        System.out.println(burg);
+        System.out.println("Adding ingredient test, adding Mushrooms");
+        burg.addIngredient("Mushrooms");
+        System.out.println(burg);
+        System.out.println("Removing category test, removing cheese");
+        burg.removeCategory("Cheese");
+        System.out.println(burg);
+        System.out.println("Adding category test, adding Cheese");
+        burg.addCategory("Cheese");
         System.out.println(burg);
     }
 }
