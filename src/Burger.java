@@ -99,7 +99,7 @@ class Burger {
     void removeCategory(String category) {
         String list = switch (category) {
             case "Cheese" -> "Cheddar Mozzarella Pepperjack";
-            case "Sauce" -> "Ketchup Mustard Mayonnaise Baron Sauce";
+            case "Sauce" -> "Ketchup Mustard Mayonnaise Baron-Sauce";
             case "Veggies" -> "Lettuce Tomato Onions Pickle Mushrooms";
             default -> "";
         };
@@ -150,7 +150,7 @@ class Burger {
         }
     }
     public String toString() {
-        return stack.toString();
+        return stack.toString() + "\n";
     }
 
 }

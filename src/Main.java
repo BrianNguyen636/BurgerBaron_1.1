@@ -1,19 +1,28 @@
-import java.util.LinkedList;
-import java.util.List;
+import java.io.File;
+
+import java.io.FileNotFoundException;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
 //        testMyStack();
 //        testBurger();
-//        parseLine("Single Burger with Veggies but no Lettuce.");
-//        parseLine("Double Chicken Burger with Ketchup Cheddar Onions Mushrooms.");
-        parseLine("Single Veggie Baron Burger");
+        try {
+            File myObj = new File("customer.txt");
+            Scanner scan = new Scanner(myObj);
+            while (scan.hasNextLine()) {
+                String line = scan.nextLine();
+                parseLine(line);
+            }
+            scan.close();
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        }
     }
     static void parseLine(String line) {
         line = line.replace(".", "");
         List<String> order = List.of(line.split(" "));
-        int burgerIndex = order.indexOf("Burger");
-        boolean theWorks = order.get(burgerIndex - 1).equals("Baron");
+        boolean theWorks = order.contains("Baron");
         Burger theBurger = new Burger(theWorks);
         System.out.println("Proccessing order " + theBurger.orderNum + ": " + line);
         if (!theWorks) {
@@ -38,16 +47,26 @@ public class Main {
                 }
             }
         } else {
-            int omissionsIndex = 0;
-            if (order.contains("but")) {
-                omissionsIndex = order.indexOf("but");
-            } else {
-                omissionsIndex = order.size();
+            if (order.contains("with")) {
+                int omissionsIndex = 0;
+                if (order.contains("but")) {
+                    omissionsIndex = order.indexOf("but");
+                } else {
+                    omissionsIndex = order.size();
+                }
+                for (int i = order.indexOf("no") + 1; i < omissionsIndex; i++) {
+                    if ("Cheese Sauce Veggies".contains(order.get(i))) {
+                        theBurger.removeCategory(order.get(i));
+                    } else {
+                        theBurger.removeIngredient(order.get(i));
+                    }
+                }
+                if (order.contains("but")) {
+                    for (int i = order.indexOf("but") + 1; i < order.size(); i++) {
+                        theBurger.addIngredient(order.get(i));
+                    }
+                }
             }
-            for (int i = order.indexOf("no") + 1; i < omissionsIndex; i++) {
-
-            }
-
         }
         if (order.contains("Double")) {
             theBurger.addPatty();
