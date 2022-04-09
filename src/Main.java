@@ -28,6 +28,18 @@ public class Main {
         boolean theWorks = order.contains("Baron");
         Burger theBurger = new Burger(theWorks);
         System.out.println("Processing order " + theBurger.orderNum + ": " + line);
+        if (order.contains("Double")) {
+            theBurger.addPatty();
+        }
+        else if (order.contains("Triple")) {
+            theBurger.addPatty();
+            theBurger.addPatty();
+        }
+        if (order.contains("Chicken")) {
+            theBurger.changePatties("Chicken");
+        } else if (order.contains("Veggie")) {
+            theBurger.changePatties("Veggie");
+        }
         if (!theWorks) {
             if (order.contains("with")) {
                 int additionsIndex;
@@ -70,18 +82,6 @@ public class Main {
                     }
                 }
             }
-        }
-        if (order.contains("Double")) {
-            theBurger.addPatty();
-        }
-        else if (order.contains("Triple")) {
-            theBurger.addPatty();
-            theBurger.addPatty();
-        }
-        if (order.contains("Chicken")) {
-            theBurger.changePatties("Chicken");
-        } else if (order.contains("Veggie")) {
-            theBurger.changePatties("Veggie");
         }
         System.out.println(theBurger);
     }
